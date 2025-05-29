@@ -6,6 +6,7 @@ import ONama from "./pages/o_nama";
 import Kontakt from "./pages/kontakt";
 import Ponuda from "./pages/ponuda";
 import "./css/style.css";
+import Counter from "./components/counter.js";
 
 function App() {
   return (
