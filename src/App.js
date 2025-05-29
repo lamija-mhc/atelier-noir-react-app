@@ -6,10 +6,9 @@ import Navbar from "./components/navbar.js"; // importuj novi Navbar
 import ONama from "./pages/o_nama";
 import Kontakt from "./pages/kontakt";
 import Ponuda from "./pages/ponuda";
-import Signin from "./pages/sign-in";
+import Signup from "./pages/sign-up.js";
 
 import "./css/style.css";
-import Counter from "./components/counter.js";
 
 function App() {
   return (
@@ -21,6 +20,7 @@ function App() {
         <Route path="/o_nama" element={<ONama />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/ponuda" element={<Ponuda />} />
+        <Route path="/sign-up" element={<Signup />} />
       </Routes>
     </Router>
   );
@@ -141,23 +141,5 @@ function Home() {
     </div>
   );
 }
-
-function App() {
-  return (
-    <Router>
-      <Navbar />  {/* ubaci Navbar komponentu */}
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/o_nama" element={<ONama />} />
-        <Route path="/kontakt" element={<Kontakt />} />
-        <Route path="/ponuda" element={<Ponuda />} />
-        <Route path="/sign-in" element={<Signin />} />
-      </Routes>
-    </Router>
-  );
-}
-
-
 
 export default App;
