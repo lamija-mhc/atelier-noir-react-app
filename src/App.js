@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Counter from "./components/counter";
 import Navbar from "./components/navbar.js"; // importuj novi Navbar
 import ONama from "./pages/o_nama";
 import Kontakt from "./pages/kontakt";
 import Ponuda from "./pages/ponuda";
+import Signup from "./pages/sign-up.js";
+
 import "./css/style.css";
 import Counter from "./components/counter"; // na vrhu Home() fajla
 
@@ -19,6 +22,7 @@ function App() {
         <Route path="/o_nama" element={<ONama />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/ponuda" element={<Ponuda />} />
+        <Route path="/sign-up" element={<Signup />} />
       </Routes>
     </Router>
   );
@@ -82,19 +86,19 @@ function Home() {
 
           <div className="stats-numbers">
             <div>
-              <Counter target={10214} />
+              <Counter target={10214} duration={3000}/>
               <p>Prodanih šoljica kafe</p>
             </div>
             <div>
-              <Counter target={5} />
+              <Counter target={5} duration={3000}/>
               <p>Zvjezdica na reviews</p>
             </div>
             <div>
-              <Counter target={25} />
+              <Counter target={25} duration={3000}/>
               <p>Saradnji širom svijeta</p>
             </div>
             <div>
-              <Counter target={104} />
+              <Counter target={104} duration={3000} />
               <p>Godine postojanja</p>
             </div>
           </div>

@@ -26,8 +26,7 @@ const Navbar = () => {
       </div>
 
       <div className="auth-buttons">
-        <a href="/registracija/log-in.html" className="btn">Prijava</a>
-        <a href="/registracija/sign-up.html" className="btn primary">Registracija</a>
+        <Link to="/sign-up" onClick={closeNav} className="btn">Registracija</Link>
       </div>
     </nav>
   );

@@ -10,12 +10,13 @@ body {
   background-color: #000;
   color: white;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
   display: flex;
   width: 100%;
+  min-height: 100vh;
 }
 
 .left, .right {
@@ -89,5 +90,5 @@ button:hover {
 }
 
 .right {
-  background: url('kafa3.jpg') no-repeat center center/cover;
+  background: url('../images/kafa3.jpg') no-repeat center center/cover;
 }
