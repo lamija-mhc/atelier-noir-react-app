@@ -1,0 +1,141 @@
+{
+  "preporuke": [
+    {
+      "naziv": "Dark Roast Ethiopian Whole",
+      "opis": "Bogata aroma tamne čokolade i začina.",
+      "gramaza": "250g",
+      "cijena": "$11.50",
+      "slika": "images/darkRST_ehtiopian_whole.png"
+    },
+    {
+      "naziv": "Extra Roast Ethiopian Whole",
+      "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+      "gramaza": "250g",
+      "cijena": "$12.00",
+      "slika": "images/extraRST_ehtiopian_whole.png"
+    },
+    {
+      "naziv": "Premium Caramel Latte",
+      "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_caramel_latte.png"
+    },
+    {
+      "naziv": "Premium Vanilla Latte",
+      "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
+      "gramaza": "250g",
+      "cijena": "$12.50",
+      "slika": "images/slika-1748346859089-929618806.png"
+    }
+  ],
+  "best": [
+    {
+      "naziv": "Extra Roast Colombian Whole",
+      "opis": "Duboko pržena, glatka kolumbijska elegancija.",
+      "gramaza": "250g",
+      "cijena": "$11.80",
+      "slika": "images/extraRST_colombian_whole.png"
+    },
+    {
+      "naziv": "Medium Roast Brazilian Ground",
+      "opis": "Svakodnevna kafa s notama lješnjaka i svilenkastim završetkom.",
+      "gramaza": "250g",
+      "cijena": "$10.50",
+      "slika": "images/mediumRST_braz_ground.png"
+    },
+    {
+      "naziv": "Premium Vanilla Latte",
+      "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_vanilla_latte.png"
+    },
+    {
+      "naziv": "Premium Chocolate Latte",
+      "opis": "Dekadentna čokoladna espresso fuzija za sladokusce.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_chocolate_latte.png"
+    }
+  ],
+  "svi": [
+    {
+      "naziv": "Dark Roast Brazilian Ground",
+      "opis": "Odvažan ukus s notama kakaa za ljubitelje tamnih kafa.",
+      "gramaza": "250g",
+      "cijena": "$11.00",
+      "slika": "images/darkRST_brazilian_ground.png"
+    },
+    {
+      "naziv": "Dark Roast Colombian Ground",
+      "opis": "Slojevit i dugotrajan kolumbijski ukus.",
+      "gramaza": "250g",
+      "cijena": "$11.30",
+      "slika": "images/darkRST_colombian_groundbean.png"
+    },
+    {
+      "naziv": "Dark Roast Ethiopian Whole",
+      "opis": "Bogata aroma tamne čokolade i začina.",
+      "gramaza": "250g",
+      "cijena": "$11.50",
+      "slika": "images/darkRST_ehtiopian_whole.png"
+    },
+    {
+      "naziv": "Extra Roast Brazilian Ground",
+      "opis": "Kompleksan, duboko pržen s baršunastom teksturom.",
+      "gramaza": "250g",
+      "cijena": "$10.50",
+      "slika": "images/extraRST_brazilian_ground.png"
+    },
+    {
+      "naziv": "Extra Roast Colombian Whole",
+      "opis": "Duboko pržena i glatka kolumbijska kafa.",
+      "gramaza": "250g",
+      "cijena": "$11.80",
+      "slika": "images/extraRST_colombian_whole.png"
+    },
+    {
+      "naziv": "Extra Roast Ethiopian Whole",
+      "opis": "Intenzivan zemljani profil sa luksuznim završetkom.",
+      "gramaza": "250g",
+      "cijena": "$12.00",
+      "slika": "images/extraRST_ehtiopian_whole.png"
+    },
+    {
+      "naziv": "Medium Roast Brazilian Ground",
+      "opis": "Svakodnevna kafa s notama lješnjaka i svilenim završetkom.",
+      "gramaza": "250g",
+      "cijena": "$10.50",
+      "slika": "images/mediumRST_braz_ground.png"
+    },
+    {
+      "naziv": "Medium Roast Colombian Whole",
+      "opis": "Izbalansirana i kremasta kolumbijska aroma.",
+      "gramaza": "250g",
+      "cijena": "$11.00",
+      "slika": "images/mediumRST_colobian_whole.png"
+    },
+    {
+      "naziv": "Premium Caramel Latte",
+      "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_caramel_latte.png"
+    },
+    {
+      "naziv": "Premium Chocolate Latte",
+      "opis": "Dekadentna čokoladna espresso fuzija za sladokusce.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_chocolate_latte.png"
+    },
+    {
+      "naziv": "Premium Vanilla Latte",
+      "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
+      "gramaza": "250g",
+      "cijena": "$12.50",
+      "slika": "images/slika-1748346859089-929618806.png"
+    }
+  ]
+}
