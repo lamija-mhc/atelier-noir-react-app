@@ -80,19 +80,19 @@ function Home() {
 
           <div className="stats-numbers">
             <div>
-              <strong className="counter" data-target="10000">10214</strong>
+              <Counter target={10214} />
               <p>Prodanih šoljica kafe</p>
             </div>
             <div>
-              <strong className="counter" data-target="4.8">5</strong>
+              <Counter target={5} />
               <p>Zvjezdica na reviews</p>
             </div>
             <div>
-              <strong className="counter" data-target="25">28</strong>
+              <Counter target={25} />
               <p>Saradnji širom svijeta</p>
             </div>
             <div>
-              <strong className="counter" data-target="104">104</strong>
+              <Counter target={104} />
               <p>Godine postojanja</p>
             </div>
           </div>
