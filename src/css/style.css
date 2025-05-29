@@ -338,11 +338,35 @@ main {
 /* Coffee Section */
 .coffee-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  max-width: calc(250px * 5 + 8rem);
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 2rem;
+}
+
+@media (min-width: 1200px) {
+  .coffee-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .coffee-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .coffee-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .coffee-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .coffee-card {
@@ -358,6 +382,15 @@ main {
   height: 500px;
   border: 1px solid #fff;
 }
+
+@media (max-width: 768px) {
+  .coffee-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
+
 
 .coffee-card:hover {
   transform: scale(1.03);

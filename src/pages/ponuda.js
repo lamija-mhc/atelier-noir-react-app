@@ -51,14 +51,26 @@ const Ponuda = () => {
       </section>
 
       {/* Best Sellers */}
-      <section
+        <section
         className="selection"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,1)),url(/images/pozadina2.png)",
-          height: "90vh",
+            backgroundImage: `
+            linear-gradient(
+                to right,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.6) 55%,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.6) 55%,
+                rgba(0, 0, 0, 1) 100%
+            ),
+            url(/images/pozadina2.png)
+            `,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
         }}
-      >
+        >
+
         <h2>Best Selleri</h2>
         <img className="separator" src="/images/separator.png" alt="Separator" />
         <div className="coffee-cards" id="bestsellers">
@@ -72,7 +84,14 @@ const Ponuda = () => {
       <section
         className="selection"
         style={{
-          backgroundImage: "url(/images/pozadina3.png)",
+          backgroundImage: `
+            linear-gradient(
+                to top,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0) 0%
+            ),
+            url(/images/pozadina3.png)
+            `,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -129,7 +148,7 @@ const Ponuda = () => {
             <h4>Kontaktirajte nas</h4>
             <p>ateliernoir@gmail.com</p>
             <p>+387 62 848 557</p>
-            <p>123 Sokak, Zenica</p>
+            <p>Štrosmajerova, Zenica</p>
           </div>
         </div>
 
