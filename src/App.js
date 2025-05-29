@@ -9,8 +9,6 @@ import Ponuda from "./pages/ponuda";
 import Signup from "./pages/sign-up.js";
 
 import "./css/style.css";
-import Counter from "./components/counter"; // na vrhu Home() fajla
-
 
 function App() {
   return (
