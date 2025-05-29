@@ -7,6 +7,7 @@ import ONama from "./pages/o_nama";
 import Kontakt from "./pages/kontakt";
 import Ponuda from "./pages/ponuda";
 import Signup from "./pages/sign-up.js";
+import Login from "./pages/log-in.js";
 
 import "./css/style.css";
 
@@ -20,7 +21,8 @@ function App() {
         <Route path="/o_nama" element={<ONama />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/ponuda" element={<Ponuda />} />
-        <Route path="/sign-up" element={<Signup />} />
+        <Route path="/sign-up" element={<Signup />} /> 
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
