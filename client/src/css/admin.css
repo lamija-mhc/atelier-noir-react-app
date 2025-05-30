@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: #000;
+  color: white;
+  display: block;
+  height: 100vh;
+  overflow-y: auto;
+  height: auto;
+}
+
+.container {
+  display: flex;
+  height: auto; /* ukloni fiksnu visinu da se prilagođava */
+}
+
+.left {
+  overflow-y: visible; /* nema scroll */
+  max-height: none;
+  height: auto;
+  padding: 2rem;
+  flex: 1;
+}
+
+.right {
+  flex: 1;
+  min-height: 100vh;
+  background: url('kafa3.jpg') no-repeat center center/cover;
+}
+
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+button,
+.google-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  border: 2px solid white;
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-btn img {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+
+.section {
+  width: 100%;
+  max-width: 600px;
+}
+
+.section h2 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.kafa-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  background-color: #111;
+}
+
+.kafa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #555;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  background-color: #222;
+  gap: 8px; /* Da bude razmaka između naziva i dugmadi */
+}
+
+.kafa span {
+  flex-grow: 1;
+}
+
+.kafa button {
+  width: auto;          /* ne zauzimaju celu širinu */
+  min-width: 80px;      /* minimum širina dugmeta */
+  padding: 4px 10px;    /* malo uže od prethodno */
+  margin-left: 8px;
+  background-color: transparent;
+  border: 1.5px solid white;
+  color: white;
+  border-radius: 3px;
+  font-weight: 600;
+  transition: 0.2s;
+  align-self: flex-end; /* desno poravnanje */
+}
+
+.kafa-buttons {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.kafa button:hover:not(:disabled) {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.kafa button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "ime": "Admin",
+    "prezime": "Korisnik",
+    "email": "admin@site.com",
+    "lozinka": "admin123",
+    "role": "admin"
+  },
+  {
+    "ime": "",
+    "prezime": "",
+    "email": "",
+    "lozinka": "",
+    "role": "guest"
+  },
+  {
+    "ime": "lamija",
+    "prezime": "mehic",
+    "email": "lamijaamehic@gmail.com",
+    "lozinka": "LAMIJA123",
+    "role": "guest"
+  },
+  {
+    "ime": "niko",
+    "prezime": "nikic",
+    "email": "nikonikic@gmail.com",
+    "lozinka": "user123",
+    "role": "guest"
+  }
+]
