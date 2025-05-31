@@ -1,55 +1,61 @@
-import React, { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ isLoggedIn = false, setIsLoggedIn, isAdmin = false, setIsAdmin }) {
-  const location = useLocation();
+const Navbar = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-useEffect(() => {
-  const korisnik = JSON.parse(localStorage.getItem("korisnik"));
-  if (setIsLoggedIn) setIsLoggedIn(!!korisnik?.token);
-  if (setIsAdmin) setIsAdmin(korisnik?.tip === "admin");
-}, [location, setIsAdmin, setIsLoggedIn]);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
 
+    const handleStorageChange = () => {
+      const updatedUser = JSON.parse(localStorage.getItem("user"));
+      setUser(updatedUser);
+    };
 
-  function logout() {
-    localStorage.removeItem("korisnik");
-    if (setIsLoggedIn) setIsLoggedIn(false);
-    if (setIsAdmin) setIsAdmin(false);
-  }
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Početna</Link>
-        </li>
+    <nav className="navbar">
+      <div className="left-group">
+        <div className="logo">
+          <Link to="/" className="logo">Atelier Noir</Link>
+        </div>
+        <ul className="nav-links">
+          <li><Link to="/">Početna</Link></li>
+          <li><Link to="/o_nama">O nama</Link></li>
+          <li><Link to="/ponuda">Ponuda</Link></li>
+          <li><Link to="/kontakt">Kontakt</Link></li>
+          {user && user.role === "admin" && (
+            <li><Link to="/admin">Admin</Link></li>
+          )}
+          {user && user.role !== "admin" && (
+            <li><Link to="/korpa">Korpa</Link></li>
+          )}
+        </ul>
+      </div>
 
-        {!isLoggedIn && (
+      <div className="auth-buttons">
+        {user ? (
+          <button className="btn primary" onClick={handleLogout}>Odjavi se</button>
+        ) : (
           <>
-            <li>
-              <Link to="/log-in">Prijava</Link>
-            </li>
-            <li>
-              <Link to="/register">Registracija</Link>
-            </li>
+            <Link to="/log-in" className="btn">Prijavi se</Link>
+            <Link to="/sign-up" className="btn primary">Registruj se</Link>
           </>
         )}
-
-        {isLoggedIn && (
-          <>
-            <li>
-              <button onClick={logout}>Odjava</button>
-            </li>
-            {isAdmin && (
-              <li>
-                <Link to="/admin">Admin Panel</Link>
-              </li>
-            )}
-          </>
-        )}
-      </ul>
+      </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

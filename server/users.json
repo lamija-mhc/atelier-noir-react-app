@@ -33,5 +33,12 @@
     "email": "niko@xn--niki-ota.com",
     "lozinka": "user123",
     "role": "guest"
+  },
+  {
+    "ime": "Harry",
+    "prezime": "Styles",
+    "email": "harry@onedirection.com",
+    "lozinka": "louis123",
+    "role": "guest"
   }
 ]

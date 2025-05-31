@@ -22,6 +22,8 @@ const Login = () => {
 
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
+        window.dispatchEvent(new Event("storage"));
+
         if (user.role === "admin") {
           navigate("/admin");
         } else {

@@ -30,7 +30,7 @@ body {
 .right {
   flex: 1;
   min-height: 100vh;
-  background: url('kafa3.jpg') no-repeat center center/cover;
+  background: url('../images/kafa3.jpg') no-repeat center center/cover;
 }
 
 
