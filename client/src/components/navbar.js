@@ -1,63 +1,55 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../css/style.css";
+import React, { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
 
-const Navbar = () => {
-  const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [menuActive, setMenuActive] = useState(false);
+function Navbar({ isLoggedIn = false, setIsLoggedIn, isAdmin = false, setIsAdmin }) {
+  const location = useLocation();
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    setIsLoggedIn(!!user);
-    // Promijeni email na onaj kojim se loguješ kao admin
-    setIsAdmin(user?.role === "admin");
-  }, []);
+useEffect(() => {
+  const korisnik = JSON.parse(localStorage.getItem("korisnik"));
+  if (setIsLoggedIn) setIsLoggedIn(!!korisnik?.token);
+  if (setIsAdmin) setIsAdmin(korisnik?.tip === "admin");
+}, [location, setIsAdmin, setIsLoggedIn]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setIsLoggedIn(false);
-    setIsAdmin(false);
-    navigate("/"); // vrati na početnu
-  };
 
-  const toggleMenu = () => setMenuActive(!menuActive);
+  function logout() {
+    localStorage.removeItem("korisnik");
+    if (setIsLoggedIn) setIsLoggedIn(false);
+    if (setIsAdmin) setIsAdmin(false);
+  }
 
   return (
-    <nav className={`navbar ${menuActive ? "active" : ""}`}>
-      <div className="left-group">
-        <ul className="nav-links">
-          <li><Link to="/" onClick={() => setMenuActive(false)}>Početna</Link></li>
-          <li><Link to="/onama" onClick={() => setMenuActive(false)}>O nama</Link></li>
-          <li><Link to="/ponuda" onClick={() => setMenuActive(false)}>Ponuda</Link></li>
-          <li><Link to="/kontakt" onClick={() => setMenuActive(false)}>Kontakt</Link></li>
-        </ul>
-      </div>
+    <nav>
+      <ul>
+        <li>
+          <Link to="/">Početna</Link>
+        </li>
 
-      <div className="auth-buttons">
-        {!isLoggedIn ? (
+        {!isLoggedIn && (
           <>
-            <Link to="/log-in" className="btn" onClick={() => setMenuActive(false)}>Prijava</Link>
-            <Link to="/sign-up" className="btn primary" onClick={() => setMenuActive(false)}>Registracija</Link>
-          </>
-        ) : (
-          <>
-            {isAdmin ? (
-              <Link to="/admin" className="btn" onClick={() => setMenuActive(false)}>Admin Panel</Link>
-            ) : (
-              <Link to="/korpa" className="btn" onClick={() => setMenuActive(false)}>Korpa</Link>
-            )}
-            <button onClick={handleLogout} className="btn">Odjava</button>
+            <li>
+              <Link to="/log-in">Prijava</Link>
+            </li>
+            <li>
+              <Link to="/register">Registracija</Link>
+            </li>
           </>
         )}
-      </div>
 
-      <div className="hamburger" onClick={toggleMenu}>
-        &#9776;
-      </div>
+        {isLoggedIn && (
+          <>
+            <li>
+              <button onClick={logout}>Odjava</button>
+            </li>
+            {isAdmin && (
+              <li>
+                <Link to="/admin">Admin Panel</Link>
+              </li>
+            )}
+          </>
+        )}
+      </ul>
     </nav>
   );
-};
+}
 
 export default Navbar;

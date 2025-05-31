@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Counter from "./components/counter";
-import Navbar from "./components/navbar.js"; // importuj novi Navbar
+import Navbar from "./components/navbar.js";
 import ONama from "./pages/o_nama";
 import Kontakt from "./pages/kontakt";
 import Ponuda from "./pages/ponuda";
@@ -13,20 +13,28 @@ import AdminPanel from "./pages/admin-panel";
 import "./css/style.css";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   return (
     <Router>
-      <Navbar />  {/* ubaci Navbar komponentu */}
+      <Navbar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
+      />
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/o_nama" element={<ONama />} />
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/ponuda" element={<Ponuda />} />
-        <Route path="/sign-up" element={<Signup />} /> 
+        <Route path="/sign-up" element={<Signup />} />
         <Route path="/log-in" element={<Login />} />
         <Route path="/korpa" element={<Korpa />} />
         <Route path="/admin" element={<AdminPanel />} />
-        <Route path="*" element={<Login />} />
+        <Route path="*" element={<h1>404 - Stranica nije pronađena</h1>} />
       </Routes>
     </Router>
   );

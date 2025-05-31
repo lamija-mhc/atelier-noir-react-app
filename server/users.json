@@ -26,5 +26,12 @@
     "email": "nikonikic@gmail.com",
     "lozinka": "user123",
     "role": "guest"
+  },
+  {
+    "ime": "niko",
+    "prezime": "nikić",
+    "email": "niko@xn--niki-ota.com",
+    "lozinka": "user123",
+    "role": "guest"
   }
 ]
