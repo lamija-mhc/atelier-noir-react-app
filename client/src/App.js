@@ -9,6 +9,9 @@ import Signup from "./pages/sign-up.js";
 import Login from "./pages/log-in";
 import Korpa from "./pages/korpa";
 import AdminPanel from "./pages/admin-panel";
+import ThankYou from "./pages/ThankYou";
+import Page404 from "./pages/404page";
+
 
 import "./css/style.css";
 
@@ -34,7 +37,8 @@ function App() {
         <Route path="/log-in" element={<Login />} />
         <Route path="/korpa" element={<Korpa />} />
         <Route path="/admin" element={<AdminPanel />} />
-        <Route path="*" element={<h1>404 - Stranica nije pronađena</h1>} />
+        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </Router>
   );

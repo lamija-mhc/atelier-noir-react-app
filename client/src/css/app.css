@@ -1,0 +1,40 @@
+.korpa-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.korpa-lista {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.korpa-stavka {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  color: #333;
+}
+
+.checkout-dugme {
+  background-color: #28a745;
+  color: white;
+  padding: 14px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.checkout-dugme:hover {
+  background-color: #218838;
+}

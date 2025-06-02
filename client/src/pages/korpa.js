@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Korpa = () => {
   const [proizvodi, setProizvodi] = useState([]);
   const [greska, setGreska] = useState("");
   const [loading, setLoading] = useState(true);
   const email = localStorage.getItem("userEmail");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!email) {
@@ -21,6 +23,7 @@ const Korpa = () => {
           setProizvodi([]);
         } else if (data.proizvodi && Array.isArray(data.proizvodi)) {
           setProizvodi(data.proizvodi);
+          setGreska("");
         } else {
           setGreska("Neočekivan odgovor sa servera.");
           setProizvodi([]);
@@ -34,23 +37,34 @@ const Korpa = () => {
       });
   }, [email]);
 
+  const handleCheckout = () => {
+    // Kad klikneš nastavi, vodi na dummy thank-you stranicu
+    navigate("/thank-you");
+  };
+
   if (loading) return <p>Učitavanje korpe...</p>;
   if (greska) return <p style={{ color: "red" }}>{greska}</p>;
 
   return (
-    <div>
+    <div className="korpa-container">
       <h2>Korpa</h2>
-      <ul>
+      <ul className="korpa-lista">
         {proizvodi.length === 0 ? (
           <li>Korpa je prazna</li>
         ) : (
           proizvodi.map((p, i) => (
-            <li key={i}>
+            <li key={i} className="korpa-stavka">
               {p.naziv} x {p.kolicina}
             </li>
           ))
         )}
       </ul>
+
+      {proizvodi.length > 0 && (
+        <button className="checkout-dugme" onClick={handleCheckout}>
+          Nastavi na plaćanje
+        </button>
+      )}
     </div>
   );
 };

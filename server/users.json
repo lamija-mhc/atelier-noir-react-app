@@ -53,6 +53,46 @@
         "cijena": "$12.00",
         "slika": "images/extraRST_ehtiopian_whole.png",
         "kolicina": 15
+      },
+      {
+        "naziv": "Extra Roast Ethiopian Whole",
+        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "gramaza": "250g",
+        "cijena": "$12.00",
+        "slika": "images/extraRST_ehtiopian_whole.png",
+        "kolicina": 1
+      },
+      {
+        "naziv": "Extra Roast Ethiopian Whole",
+        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "gramaza": "250g",
+        "cijena": "$12.00",
+        "slika": "images/extraRST_ehtiopian_whole.png",
+        "kolicina": 1
+      },
+      {
+        "naziv": "Premium Caramel Latte",
+        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+        "gramaza": "200g",
+        "cijena": "$12.50",
+        "slika": "images/premium_caramel_latte.png",
+        "kolicina": 1
+      },
+      {
+        "naziv": "Premium Caramel Latte",
+        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+        "gramaza": "200g",
+        "cijena": "$12.50",
+        "slika": "images/premium_caramel_latte.png",
+        "kolicina": 1
+      },
+      {
+        "naziv": "Premium Caramel Latte",
+        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+        "gramaza": "200g",
+        "cijena": "$12.50",
+        "slika": "images/premium_caramel_latte.png",
+        "kolicina": 1
       }
     ]
   }
