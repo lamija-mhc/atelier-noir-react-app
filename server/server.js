@@ -6,153 +6,148 @@ const cors = require("cors");
 const app = express();
 const PORT = 5000;
 
-// Putanje do fajlova
+// Putanje
 const DATA_PATH = path.join(__dirname, "..", "client", "src", "data", "data.json");
 const USERS_PATH = path.join(__dirname, "users.json");
-const CARTS_PATH = path.join(__dirname, "carts.json");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// Helpers
+const readJSON = (filePath) => JSON.parse(fs.readFileSync(filePath, "utf8"));
+const writeJSON = (filePath, data) => fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+
 // --- USERS ---
 app.get("/api/users", (req, res) => {
-  fs.readFile(USERS_PATH, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Greška pri čitanju korisnika." });
-    try {
-      const users = JSON.parse(data);
-      res.json(users);
-    } catch {
-      res.status(500).json({ error: "Greška pri parsiranju korisnika." });
-    }
-  });
+  try {
+    const users = readJSON(USERS_PATH);
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: "Greška pri čitanju korisnika." });
+  }
 });
 
 app.post("/api/users", (req, res) => {
   const noviKorisnik = req.body;
-  fs.readFile(USERS_PATH, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Greška pri čitanju korisnika." });
-    let users;
-    try {
-      users = JSON.parse(data);
-    } catch {
-      return res.status(500).json({ error: "Greška pri parsiranju korisnika." });
-    }
+  try {
+    const users = readJSON(USERS_PATH);
     if (users.find(u => u.email === noviKorisnik.email)) {
       return res.status(400).json({ error: "Korisnik već postoji." });
     }
     users.push(noviKorisnik);
-    fs.writeFile(USERS_PATH, JSON.stringify(users, null, 2), err => {
-      if (err) return res.status(500).json({ error: "Greška pri čuvanju korisnika." });
-      res.status(201).json({ message: "Korisnik uspješno dodan." });
-    });
-  });
+    writeJSON(USERS_PATH, users);
+    res.status(201).json({ message: "Korisnik uspješno dodan." });
+  } catch (err) {
+    res.status(500).json({ error: "Greška pri dodavanju korisnika." });
+  }
 });
 
 app.get("/api/user-type/:email", (req, res) => {
-  const email = req.params.email;
-  fs.readFile(USERS_PATH, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Greška pri čitanju korisnika." });
-    try {
-      const users = JSON.parse(data);
-      const user = users.find(u => u.email === email);
-      if (!user) return res.status(404).json({ error: "Korisnik nije pronađen." });
-      res.json({ type: user.admin ? "admin" : "gost" });
-    } catch {
-      res.status(500).json({ error: "Greška pri parsiranju korisnika." });
-    }
-  });
+  try {
+    const users = readJSON(USERS_PATH);
+    const user = users.find(u => u.email === req.params.email);
+    if (!user) return res.status(404).json({ error: "Korisnik nije pronađen." });
+    res.json({ type: user.role === "admin" ? "admin" : "guest" });
+  } catch (err) {
+    res.status(500).json({ error: "Greška pri dohvaćanju tipa korisnika." });
+  }
 });
 
 // --- CART ---
-app.get("/api/cart/:email", (req, res) => {
-  fs.readFile(CARTS_PATH, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Greška pri čitanju korpe." });
-    let carts = [];
-    try {
-      carts = JSON.parse(data);
-    } catch {
-      carts = [];
+// Dodaj proizvod u korpu korisnika (izmijenjeno da povećava količinu ako proizvod postoji)
+app.post("/api/cart/:email", (req, res) => {
+  const { email } = req.params;
+  const noviProizvod = req.body; // očekujemo objekat sa npr. { id, naziv, cijena, kolicina }
+
+  try {
+    const users = readJSON(USERS_PATH);
+    const userIndex = users.findIndex(u => u.email === email);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "Korisnik nije pronađen." });
     }
-    const userCart = carts.find(c => c.email === req.params.email);
-    res.json(userCart ? userCart.items : []);
-  });
+
+    if (!users[userIndex].korpa) {
+      users[userIndex].korpa = [];
+    }
+
+    const korpa = users[userIndex].korpa;
+
+    // Provjeri da li proizvod već postoji u korpi
+    const postojiProizvod = korpa.find(p => p.id === noviProizvod.id);
+
+    if (postojiProizvod) {
+      // Povećaj količinu
+      postojiProizvod.kolicina += noviProizvod.kolicina;
+    } else {
+      // Dodaj novi proizvod u korpu
+      korpa.push(noviProizvod);
+    }
+
+    writeJSON(USERS_PATH, users);
+
+    res.json({ message: "Artikal dodat u korpu." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Greška pri dodavanju u korpu." });
+  }
 });
 
+
+// Dodaj proizvod u korpu korisnika
 app.post("/api/cart/:email", (req, res) => {
-  const email = req.params.email;
+  const { email } = req.params;
   const item = req.body;
-  fs.readFile(CARTS_PATH, "utf8", (err, data) => {
-    if (err) return res.status(500).json({ error: "Greška pri čitanju korpe." });
-    let carts = [];
-    try {
-      carts = JSON.parse(data);
-    } catch {
-      carts = [];
+
+  try {
+    const users = readJSON(USERS_PATH);
+    const userIndex = users.findIndex(u => u.email === email);
+
+    if (userIndex === -1) {
+      return res.status(404).json({ error: "Korisnik nije pronađen." });
     }
-    let userCart = carts.find(c => c.email === email);
-    if (userCart) {
-      userCart.items.push(item);
-    } else {
-      carts.push({ email, items: [item] });
+
+    if (!users[userIndex].korpa) {
+      users[userIndex].korpa = [];
     }
-    fs.writeFile(CARTS_PATH, JSON.stringify(carts, null, 2), err => {
-      if (err) return res.status(500).json({ error: "Greška pri čuvanju korpe." });
-      res.json({ message: "Artikal dodat u korpu." });
-    });
-  });
+
+    users[userIndex].korpa.push(item);
+    writeJSON(USERS_PATH, users);
+
+    res.json({ message: "Artikal dodat u korpu." });
+  } catch (err) {
+    res.status(500).json({ error: "Greška pri dodavanju u korpu." });
+  }
 });
 
 // --- PRODUCTS ---
-const readData = () => JSON.parse(fs.readFileSync(DATA_PATH, "utf8"));
-const writeData = (data) => fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
+const readData = () => readJSON(DATA_PATH);
+const writeData = (data) => writeJSON(DATA_PATH, data);
 
-// Vrati sve proizvode
 app.get("/api/products", (req, res) => {
   try {
-    const products = readData();
-    res.json(products);
+    res.json(readData());
   } catch {
     res.status(500).json({ error: "Greška pri čitanju proizvoda." });
   }
 });
 
-// Vrati proizvode iz 'svi' kategorije
-app.get("/api/products/svi", (req, res) => {
+app.get("/api/products/:category", (req, res) => {
   try {
-    const products = readData();
-    res.json(products.svi || []);
+    const data = readData();
+    const category = req.params.category;
+    res.json(data[category] || []);
   } catch {
-    res.status(500).json({ error: "Greška pri čitanju proizvoda." });
-  }
-});
-// Vrati proizvode iz 'preporuke' kategorije
-app.get("/api/products/preporuke", (req, res) => {
-  try {
-    const products = readData();
-    res.json(products.preporuke || []);
-  } catch {
-    res.status(500).json({ error: "Greška pri čitanju preporuka." });
+    res.status(500).json({ error: "Greška pri čitanju proizvoda iz kategorije." });
   }
 });
 
-// Vrati proizvode iz 'best' kategorije
-app.get("/api/products/best", (req, res) => {
-  try {
-    const products = readData();
-    res.json(products.best || []);
-  } catch {
-    res.status(500).json({ error: "Greška pri čitanju best proizvoda." });
-  }
-});
-
-// Dodaj proizvod samo u 'svi' kategoriju
 app.post("/api/products/svi", (req, res) => {
   try {
-    const noviProizvod = req.body;
     const data = readData();
     if (!data.svi) data.svi = [];
-    data.svi.push(noviProizvod);
+    data.svi.push(req.body);
     writeData(data);
     res.status(201).json({ message: "Proizvod dodat u 'svi' kategoriju." });
   } catch {
@@ -160,7 +155,6 @@ app.post("/api/products/svi", (req, res) => {
   }
 });
 
-// Dodaj proizvod u određenu kategoriju
 app.post("/api/products/category", (req, res) => {
   try {
     const { proizvod, kategorija } = req.body;
@@ -171,7 +165,7 @@ app.post("/api/products/category", (req, res) => {
     }
 
     if (data[kategorija].some(p => p.naziv === proizvod.naziv)) {
-      return res.status(400).json({ error: "Već postoji u toj kategoriji." });
+      return res.status(400).json({ error: "Proizvod već postoji u toj kategoriji." });
     }
 
     data[kategorija].push(proizvod);
@@ -182,22 +176,12 @@ app.post("/api/products/category", (req, res) => {
   }
 });
 
-// Ostale rute
-app.get('/api/data', (req, res) => {
-  try {
-    const data = readData();
-    res.json(data);
-  } catch {
-    res.status(500).json({ error: "Greška pri čitanju podataka." });
-  }
-});
-
+// --- ADMIN RUTE ---
 app.post('/api/artikal', (req, res) => {
   try {
-    const novi = req.body;
     const data = readData();
     if (!data.svi) data.svi = [];
-    data.svi.push(novi);
+    data.svi.push(req.body);
     writeData(data);
     res.json({ message: 'Artikal dodan' });
   } catch {
@@ -211,7 +195,9 @@ app.put('/api/dodaj/:kategorija', (req, res) => {
     const artikal = req.body;
     const data = readData();
 
-    if (!data[kategorija]) return res.status(400).json({ error: 'Nepostojeća kategorija.' });
+    if (!data[kategorija]) {
+      return res.status(400).json({ error: 'Nepostojeća kategorija.' });
+    }
 
     if (data[kategorija].length >= 4) {
       return res.status(400).json({ error: 'Maksimalno 4 artikla u kategoriji.' });
@@ -233,7 +219,9 @@ app.delete('/api/obrisi/:kategorija/:naziv', (req, res) => {
     const { kategorija, naziv } = req.params;
     const data = readData();
 
-    if (!data[kategorija]) return res.status(400).json({ error: 'Nepostojeća kategorija.' });
+    if (!data[kategorija]) {
+      return res.status(400).json({ error: 'Nepostojeća kategorija.' });
+    }
 
     data[kategorija] = data[kategorija].filter(a => a.naziv !== naziv);
     writeData(data);

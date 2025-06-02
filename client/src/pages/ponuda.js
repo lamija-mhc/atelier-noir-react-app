@@ -1,43 +1,45 @@
 import React, { useState } from "react";
-import data from "../data/data.json"; // Provjeri putanju
-
-// Definicija CoffeeCard komponente
-const CoffeeCard = ({ proizvod }) => {
-  const handleAddToCart = () => {
-    console.log(`Dodano u korpu: ${proizvod.naziv}`);
-    // Ovdje ćeš kasnije dodavati logiku za korpu
-  };
-
-  return (
-    <div className="coffee-card">
-      <div className="card-image">
-        <img src={proizvod.slika} alt={proizvod.naziv} />
-      </div>
-      <div className="card-content">
-        <h3>{proizvod.naziv}</h3>
-        <p className="card-description">{proizvod.opis}</p>
-        <p className="card-weight">Težina: {proizvod.gramaza}</p>
-        <div className="card-bottom">
-          <span className="cijena">{proizvod.cijena}</span>
-          <button onClick={handleAddToCart} className="btn btn-cart">
-            Dodaj u korpu
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
+import data from "../data/data.json";
+import CoffeeCard from "../components/CoffeeCard";
 
 const Ponuda = () => {
   const [prikaziSve, setPrikaziSve] = useState(false);
 
-  // Prikazujemo ili prvih 4 ili sve proizvode
+const handleAddToCart = async (proizvod, kolicina) => {
+  const userEmail = localStorage.getItem("userEmail");
+
+  if (!userEmail) {
+    alert("Niste prijavljeni!");
+    return;
+  }
+
+  try {
+    // Backend očekuje POST na /api/cart/:email
+    const response = await fetch(`http://localhost:5000/api/cart/${encodeURIComponent(userEmail)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...proizvod, kolicina }),
+    });
+
+    const result = await response.json();
+
+    // Backend u tvom kodu vraća { message: "..."} a ne { success: true }
+    if (response.ok) {
+      alert(result.message || "Proizvod je uspješno dodat u korpu!");
+    } else {
+      alert("Greška: " + (result.error || "Nepoznata greška"));
+    }
+  } catch (error) {
+    console.error("Greška pri dodavanju u korpu:", error);
+    alert("Došlo je do greške prilikom dodavanja u korpu.");
+  }
+};
+
+
   const proizvodiZaPrikaz = prikaziSve ? data.svi : data.svi.slice(0, 4);
 
   return (
     <>
-      {/* Hero section */}
       <section className="hero">
         <div className="hero-content">
           <img className="logo2" src="/images/logo2.png" alt="Atelier Noir Logo" />
@@ -50,22 +52,20 @@ const Ponuda = () => {
         </div>
       </section>
 
-      {/* Recommended */}
       <section className="selection">
         <h2>Naše preporuke</h2>
         <img className="separator" src="/images/separator.png" alt="Separator" />
         <div className="coffee-cards" id="recommended">
           {data.preporuke.map((proizvod, index) => (
-            <CoffeeCard key={index} proizvod={proizvod} />
+            <CoffeeCard key={index} proizvod={proizvod} onAddToCart={handleAddToCart} />
           ))}
         </div>
       </section>
 
-      {/* Best Sellers */}
-        <section
+      <section
         className="selection"
         style={{
-            backgroundImage: `
+          backgroundImage: `
             linear-gradient(
                 to right,
                 rgba(0, 0, 0, 1) 0%,
@@ -76,22 +76,20 @@ const Ponuda = () => {
             ),
             url(/images/pozadina2.png)
             `,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-        >
-
+      >
         <h2>Best Selleri</h2>
         <img className="separator" src="/images/separator.png" alt="Separator" />
         <div className="coffee-cards" id="bestsellers">
           {data.best.map((proizvod, index) => (
-            <CoffeeCard key={index} proizvod={proizvod} />
+            <CoffeeCard key={index} proizvod={proizvod} onAddToCart={handleAddToCart} />
           ))}
         </div>
       </section>
 
-      {/* All Products */}
       <section
         className="selection"
         style={{
@@ -112,14 +110,13 @@ const Ponuda = () => {
         <img className="separator" src="/images/separator.png" alt="Separator" />
         <div className="coffee-cards" id="all-products">
           {proizvodiZaPrikaz.map((proizvod, index) => (
-            <CoffeeCard key={index} proizvod={proizvod} />
+            <CoffeeCard key={index} proizvod={proizvod} onAddToCart={handleAddToCart} />
           ))}
         </div>
 
         {!prikaziSve && data.svi.length > 4 && (
           <button
             className="btn"
-            id="show-all"
             style={{ marginTop: "3rem", marginBottom: "3rem" }}
             onClick={() => setPrikaziSve(true)}
           >
@@ -138,7 +135,6 @@ const Ponuda = () => {
         )}
       </section>
 
-      {/* Footer */}
       <footer>
         <div className="footer-content">
           <div className="footer-column">
@@ -146,7 +142,6 @@ const Ponuda = () => {
             <p>Auctor volutpat</p>
             <p>Fermentum turpis</p>
           </div>
-
           <div className="footer-column">
             <h4>Get the app</h4>
             <div className="app-icons">
@@ -154,7 +149,6 @@ const Ponuda = () => {
               <img src="/images/googleplay.png" alt="Google Play" />
             </div>
           </div>
-
           <div className="footer-column">
             <h4>Kontaktirajte nas</h4>
             <p>ateliernoir@gmail.com</p>
@@ -162,7 +156,6 @@ const Ponuda = () => {
             <p>Štrosmajerova, Zenica</p>
           </div>
         </div>
-
         <div className="bottom-footer">
           <img src="/images/logo3.png" alt="Atelier Noir Logo" />
           <p>© 2025 Atelier Noir. All rights reserved.</p>

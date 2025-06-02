@@ -38,13 +38,6 @@
       "slika": "images/mediumRST_braz_ground.png"
     },
     {
-      "naziv": "Dark Roast Brazilian Ground",
-      "opis": "Odvažan ukus s notama kakaa za ljubitelje tamnih kafa.",
-      "gramaza": "250g",
-      "cijena": "$11.00",
-      "slika": "images/darkRST_brazilian_ground.png"
-    },
-    {
       "naziv": "Extra Roast Brazilian Ground",
       "opis": "Kompleksan, duboko pržen s baršunastom teksturom.",
       "gramaza": "250g",
@@ -52,11 +45,18 @@
       "slika": "images/extraRST_brazilian_ground.png"
     },
     {
-      "naziv": "Dark Roast Colombian Ground",
-      "opis": "Slojevit i dugotrajan kolumbijski ukus.",
+      "naziv": "Premium Vanilla Latte",
+      "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
       "gramaza": "250g",
-      "cijena": "$11.30",
-      "slika": "images/darkRST_colombian_groundbean.png"
+      "cijena": "$12.50",
+      "slika": "images/slika-1748346859089-929618806.png"
+    },
+    {
+      "naziv": "Premium Chocolate Latte",
+      "opis": "Dekadentna čokoladna espresso fuzija za sladokusce.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_chocolate_latte.png"
     }
   ],
   "svi": [

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -21,9 +20,14 @@ const Login = () => {
       );
 
       if (user) {
+        // Sačuvaj cijelog user-a i email posebno
         localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("userEmail", user.email);
+
+        // Obavijesti aplikaciju da je user promijenjen
         window.dispatchEvent(new Event("storage"));
 
+        // Preusmjerenje na osnovu role
         if (user.role === "admin") {
           navigate("/admin");
         } else {
@@ -61,7 +65,7 @@ const Login = () => {
             {greska && <p className="error">{greska}</p>}
           </form>
           <div className="links">
-            <a href="/signup">Nemate nalog? Registrujte se</a>
+            <Link to="/signup">Nemate nalog? Registrujte se</Link>
           </div>
         </div>
       </div>

@@ -4,41 +4,56 @@
     "prezime": "Korisnik",
     "email": "admin@site.com",
     "lozinka": "admin123",
-    "role": "admin"
-  },
-  {
-    "ime": "",
-    "prezime": "",
-    "email": "",
-    "lozinka": "",
-    "role": "guest"
+    "role": "admin",
+    "korpa": []
   },
   {
     "ime": "lamija",
     "prezime": "mehic",
-    "email": "lamijaamehic@gmail.com",
-    "lozinka": "LAMIJA123",
-    "role": "guest"
-  },
-  {
-    "ime": "niko",
-    "prezime": "nikic",
-    "email": "nikonikic@gmail.com",
-    "lozinka": "user123",
-    "role": "guest"
-  },
-  {
-    "ime": "niko",
-    "prezime": "nikić",
-    "email": "niko@xn--niki-ota.com",
-    "lozinka": "user123",
-    "role": "guest"
-  },
-  {
-    "ime": "Harry",
-    "prezime": "Styles",
-    "email": "harry@onedirection.com",
-    "lozinka": "louis123",
-    "role": "guest"
+    "email": "lamija@mehic.com",
+    "lozinka": "lamija123",
+    "role": "guest",
+    "korpa": [
+      {
+        "naziv": "Extra Roast Ethiopian Whole",
+        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "gramaza": "250g",
+        "cijena": "$12.00",
+        "kolicina": 1,
+        "slika": "images/extraRST_ehtiopian_whole.png"
+      },
+      {
+        "naziv": "Premium Caramel Latte",
+        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+        "gramaza": "200g",
+        "cijena": "$12.50",
+        "kolicina": 2,
+        "slika": "images/premium_caramel_latte.png"
+      },
+      {
+        "naziv": "Premium Vanilla Latte",
+        "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
+        "gramaza": "250g",
+        "cijena": "$12.50",
+        "kolicina": 1,
+        "slika": "images/slika-1748346859089-929618806.png"
+      },
+      {
+        "naziv": "Extra Roast Ethiopian Whole",
+        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "gramaza": "250g",
+        "cijena": "$12.00",
+        "slika": "images/extraRST_ehtiopian_whole.png",
+        "kolicina": 1
+      },
+      {
+        "naziv": "Extra Roast Ethiopian Whole",
+        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "gramaza": "250g",
+        "cijena": "$12.00",
+        "slika": "images/extraRST_ehtiopian_whole.png",
+        "kolicina": 15
+      }
+    ]
   }
 ]

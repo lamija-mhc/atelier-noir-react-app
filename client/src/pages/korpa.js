@@ -1,29 +1,56 @@
 import React, { useEffect, useState } from "react";
 
 const Korpa = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const [cartItems, setCartItems] = useState([]);
+  const [proizvodi, setProizvodi] = useState([]);
+  const [greska, setGreska] = useState("");
+  const [loading, setLoading] = useState(true);
+  const email = localStorage.getItem("userEmail");
 
   useEffect(() => {
-    if (!user) return;
-    fetch(`http://localhost:5000/api/cart/${user.email}`)
+    if (!email) {
+      setLoading(false);
+      setGreska("Morate biti prijavljeni da biste vidjeli korpu.");
+      return;
+    }
+
+    fetch(`http://localhost:5000/api/cart/${email}`)
       .then((res) => res.json())
-      .then((data) => setCartItems(data))
-      .catch(() => setCartItems([]));
-  }, [user]);
+      .then((data) => {
+        if (data.error) {
+          setGreska(data.error);
+          setProizvodi([]);
+        } else if (data.proizvodi && Array.isArray(data.proizvodi)) {
+          setProizvodi(data.proizvodi);
+        } else {
+          setGreska("Neočekivan odgovor sa servera.");
+          setProizvodi([]);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        setGreska("Došlo je do greške prilikom učitavanja korpe.");
+        setProizvodi([]);
+        setLoading(false);
+      });
+  }, [email]);
+
+  if (loading) return <p>Učitavanje korpe...</p>;
+  if (greska) return <p style={{ color: "red" }}>{greska}</p>;
 
   return (
     <div>
-      <h1>Korpa korisnika: {user?.email}</h1>
-      {cartItems.length === 0 ? (
-        <p>Korpa je prazna.</p>
-      ) : (
-        <ul>
-          {cartItems.map((item, idx) => (
-            <li key={idx}>{item.name} - {item.price} KM</li>
-          ))}
-        </ul>
-      )}
+      <h2>Korpa</h2>
+      <ul>
+        {proizvodi.length === 0 ? (
+          <li>Korpa je prazna</li>
+        ) : (
+          proizvodi.map((p, i) => (
+            <li key={i}>
+              {p.naziv} x {p.kolicina}
+            </li>
+          ))
+        )}
+      </ul>
     </div>
   );
 };
