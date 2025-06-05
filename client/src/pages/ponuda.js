@@ -117,7 +117,20 @@ const handleAddToCart = async (proizvod, kolicina) => {
         {!prikaziSve && data.svi.length > 4 && (
           <button
             className="btn"
-            style={{ marginTop: "3rem", marginBottom: "3rem" }}
+           style={{
+              marginTop: "3rem",
+              marginBottom: "3rem",
+              backgroundColor: "#552216",
+              color: "white",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "6px",
+              cursor: "pointer",
+              width: "auto",
+              fontWeight: "bold",
+              fontSize: "16px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.3)"
+            }}
             onClick={() => setPrikaziSve(true)}
           >
             Prikaži sve
@@ -127,7 +140,21 @@ const handleAddToCart = async (proizvod, kolicina) => {
         {prikaziSve && (
           <button
             className="btn"
-            style={{ marginTop: "3rem", marginBottom: "3rem" }}
+            style={{
+              marginTop: "3rem",
+              marginBottom: "3rem",
+              backgroundColor: "#552216",
+              color: "white",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "6px",
+              cursor: "pointer",
+              width: "auto",
+              fontWeight: "bold",
+              fontSize: "16px",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.3)"
+            }}
+
             onClick={() => setPrikaziSve(false)}
           >
             Prikaži manje

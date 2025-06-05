@@ -39,11 +39,14 @@ main {
   align-items: center;
 }
 
-.navbar .logo {
-  font-weight: bold;
+.navbar .logo a{
   color: #A38560;
-  font-size: 1.2rem;
-  margin-right: 4rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar .logo a:visited {
+  color: #A38560;
 }
 
 .nav-links {
@@ -56,6 +59,7 @@ main {
 
 .nav-links li {
   display: inline-block;
+  margin-left:2rem;
 }
 
 .nav-links a {
@@ -74,6 +78,7 @@ main {
   display: flex;
   font-family: 'Lato', sans-serif;
   align-items: center;
+  margin-left: 10rem;
 }
 
 .auth-buttons .btn {
@@ -104,44 +109,69 @@ main {
   color: #fff;
   cursor: pointer;
   user-select: none;
+  align-self: center;     
+  margin-left: auto; 
 }
 
-/* Responsive Menu */
 @media (max-width: 868px) {
   .hamburger {
     display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 2rem;
+    z-index: 1100;
+    margin-bottom: 0;
   }
+
 
   .nav-links,
   .auth-buttons {
     display: none;
     flex-direction: column;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    padding: 1rem 3rem;
-    font-family: 'Lato', sans-serif;
-    margin: 0;
+    background-color: rgba(0, 0, 0, 0.97);
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    animation: slideDown 0.3s ease-in-out;
   }
 
-  /* Kada navbar ima klasu active, prikaži menije */
   .navbar.active .nav-links,
   .navbar.active .auth-buttons {
     display: flex;
   }
 
   .nav-links {
-    gap: 1rem;
-  }
-
-  .auth-buttons {
-    margin-top: 1rem;
+    gap: 0.5rem;
   }
 
   .nav-links li {
     display: block;
-    margin-bottom: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .auth-buttons {
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .auth-buttons .btn {
+    margin-left: 0;
+    width: fit-content;
   }
 }
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Hero Section */
 .hero {
@@ -153,6 +183,8 @@ main {
   text-align: center;
   margin-top: -10vh;
 }
+
+
 
 .logo2 {
   display: block;      
@@ -193,19 +225,29 @@ main {
 }
 
 .btn {
-  background-color: #552216;
+  padding: 8px 16px;
+  background-color: #444;
   color: white;
-  padding: 0.75rem 1.5rem;
   text-decoration: none;
-  border-radius: 5px;
-  display: inline-block;
+  border: none;
+  border-radius: 6px;
+  margin-left: 10px;
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
-  opacity: 0.9;
+  background-color: #333;
 }
+
+.btn.primary {
+  background-color: #552216;
+}
+
+.btn.primary:hover {
+  background-color: #552216a9;
+}
+
 
 /* Selection Section */
 .selection {
@@ -491,9 +533,16 @@ main {
   font-size: 0.9rem;
   margin-left: 0.25rem;
 }
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* ili center ako želiš centrirano */
+  gap: 8px; /* razmak između inputa i dugmeta */
+}
+
 
 .btn-cart {
-  margin-left: 1rem;
+  margin-right:1rem;
   background-color: #a38560;
   color: white;
   border: none;
@@ -505,6 +554,70 @@ main {
 
 .btn-cart:hover {
   background-color: #8c6c47;
+}
+.korpa-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.korpa-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.korpa-stavka {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.korpa-info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cijena {
+  font-weight: bold;
+}
+
+
+.korpa-slika {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: rgb(108, 6, 6);
+  font-size: 20px;
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.checkout-dugme {
+  margin-top: 2rem;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 

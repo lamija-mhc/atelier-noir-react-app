@@ -38,13 +38,6 @@
       "slika": "images/mediumRST_braz_ground.png"
     },
     {
-      "naziv": "Extra Roast Brazilian Ground",
-      "opis": "Kompleksan, duboko pržen s baršunastom teksturom.",
-      "gramaza": "250g",
-      "cijena": "$10.50",
-      "slika": "images/extraRST_brazilian_ground.png"
-    },
-    {
       "naziv": "Premium Vanilla Latte",
       "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
       "gramaza": "250g",
@@ -57,6 +50,13 @@
       "gramaza": "200g",
       "cijena": "$12.50",
       "slika": "images/premium_chocolate_latte.png"
+    },
+    {
+      "naziv": "Premium Caramel Latte",
+      "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
+      "gramaza": "200g",
+      "cijena": "$12.50",
+      "slika": "images/premium_caramel_latte.png"
     }
   ],
   "svi": [

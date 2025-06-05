@@ -8,13 +8,7 @@ const Korpa = () => {
   const email = localStorage.getItem("userEmail");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!email) {
-      setLoading(false);
-      setGreska("Morate biti prijavljeni da biste vidjeli korpu.");
-      return;
-    }
-
+  const fetchCart = () => {
     fetch(`http://localhost:5000/api/cart/${email}`)
       .then((res) => res.json())
       .then((data) => {
@@ -28,19 +22,50 @@ const Korpa = () => {
           setGreska("Neočekivan odgovor sa servera.");
           setProizvodi([]);
         }
-        setLoading(false);
       })
-      .catch((err) => {
-        setGreska("Došlo je do greške prilikom učitavanja korpe.");
-        setProizvodi([]);
-        setLoading(false);
+      .catch(() => {
+        setGreska("Greška pri povezivanju sa serverom.");
       });
+  };
+
+  useEffect(() => {
+    if (!email) {
+      setLoading(false);
+      setGreska("Morate biti prijavljeni da biste vidjeli korpu.");
+      return;
+    }
+    fetchCart();
+    setLoading(false);
   }, [email]);
 
+  const handleDelete = (id) => {
+    console.log("Brisanje proizvoda sa id:", id);
+    fetch(`http://localhost:5000/api/cart/${email}/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Odgovor backend-a:", data);
+        if (data.success) {
+          fetchCart(); // ponovo učitaj korpu
+        } else {
+          alert("Brisanje nije uspjelo.");
+        }
+      })
+      .catch((err) => {
+        console.error("Greška pri brisanju:", err);
+      });
+  };
+
   const handleCheckout = () => {
-    // Kad klikneš nastavi, vodi na dummy thank-you stranicu
     navigate("/thank-you");
   };
+
+  // Izračun ukupne cijene
+  const ukupno = proizvodi.reduce((sum, p) => {
+    const cijenaBroj = parseFloat(p.cijena.replace("$", ""));
+    return sum + cijenaBroj * (p.kolicina || 1);
+  }, 0);
 
   if (loading) return <p>Učitavanje korpe...</p>;
   if (greska) return <p style={{ color: "red" }}>{greska}</p>;
@@ -52,18 +77,33 @@ const Korpa = () => {
         {proizvodi.length === 0 ? (
           <li>Korpa je prazna</li>
         ) : (
-          proizvodi.map((p, i) => (
-            <li key={i} className="korpa-stavka">
-              {p.naziv} x {p.kolicina}
+          proizvodi.map((p) => (
+            <li key={p.id} className="korpa-stavka">
+              <img src={p.slika} alt={p.naziv} className="korpa-slika" />
+              <div className="korpa-info">
+                <p>
+                  {p.naziv} x {p.kolicina}
+                </p>
+                <p className="cijena">
+                  $
+                  {(parseFloat(p.cijena.replace("$", "")) * (p.kolicina || 1)).toFixed(2)}
+                </p>
+              </div>
+              <button className="delete-btn" onClick={() => handleDelete(p.id)}>
+                ✖
+              </button>
             </li>
           ))
         )}
       </ul>
 
       {proizvodi.length > 0 && (
-        <button className="checkout-dugme" onClick={handleCheckout}>
-          Nastavi na plaćanje
-        </button>
+        <>
+          <div className="ukupno">Ukupno: ${ukupno.toFixed(2)}</div>
+          <button className="checkout-dugme" onClick={handleCheckout}>
+            Nastavi na plaćanje
+          </button>
+        </>
       )}
     </div>
   );

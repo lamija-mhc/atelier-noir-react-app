@@ -1,8 +1,41 @@
-// src/pages/Kontakt.js
-import React from "react";
+import React, { useState } from "react";
 import "../css/style.css";
 
 const Kontakt = () => {
+  const [ime, setIme] = useState("");
+  const [email, setEmail] = useState("");
+  const [poruka, setPoruka] = useState("");
+  const [greska, setGreska] = useState("");
+  const [uspjeh, setUspjeh] = useState("");
+
+  const validateEmail = (email) => {
+    // Jednostavna regex provjera emaila
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setGreska("");
+    setUspjeh("");
+
+    if (!ime.trim() || !email.trim() || !poruka.trim()) {
+      setGreska("Sva polja su obavezna.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setGreska("Unesite validnu email adresu.");
+      return;
+    }
+
+    // Ovdje možeš poslati podatke na backend ili API
+
+    setUspjeh("Poruka je uspješno poslata! Hvala na kontaktu.");
+    setIme("");
+    setEmail("");
+    setPoruka("");
+  };
+
   return (
     <>
       <section className="contact">
@@ -34,10 +67,32 @@ const Kontakt = () => {
             </div>
 
             {/* Kontakt forma */}
-            <form className="contact-form">
-              <input type="text" placeholder="Vaše ime" required />
-              <input type="email" placeholder="Vaš email" required />
-              <textarea placeholder="Vaša poruka" rows="5" required></textarea>
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              <input
+                type="text"
+                placeholder="Vaše ime"
+                value={ime}
+                onChange={(e) => setIme(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Vaš email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <textarea
+                placeholder="Vaša poruka"
+                rows="5"
+                value={poruka}
+                onChange={(e) => setPoruka(e.target.value)}
+                required
+              ></textarea>
+
+              {greska && <p style={{ color: "#b51818" }}>{greska}</p>}
+              {uspjeh && <p style={{ color: "#157810" }}>{uspjeh}</p>}
+
               <button type="submit" className="btn primary">
                 Pošalji poruku
               </button>

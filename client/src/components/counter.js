@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Counter({ target, duration = 2000 }) {
-  const [count, setCount] = useState(0);
+function Counter({ target, duration = 2000, start = 0 }) {
+  const [count, setCount] = useState(start);
   const ref = useRef();
   const started = useRef(false);
 
@@ -10,18 +10,19 @@ function Counter({ target, duration = 2000 }) {
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
-          let start = 0;
+          let current = start;
           const end = parseFloat(target);
-          const stepTime = Math.abs(Math.floor(duration / end));
+          const totalSteps = Math.abs(end - start);
+          const stepTime = Math.abs(Math.floor(duration / totalSteps));
 
           const timer = setInterval(() => {
-            start += 1;
-            setCount((prev) => {
-              if (start >= end) {
+            current += 1;
+            setCount(() => {
+              if (current >= end) {
                 clearInterval(timer);
                 return end;
               }
-              return start;
+              return current;
             });
           }, stepTime);
         }
@@ -38,7 +39,7 @@ function Counter({ target, duration = 2000 }) {
         observer.unobserve(ref.current);
       }
     };
-  }, [target, duration]);
+  }, [target, duration, start]);
 
   return (
     <strong ref={ref} className="counter">
@@ -46,5 +47,6 @@ function Counter({ target, duration = 2000 }) {
     </strong>
   );
 }
+
 
 export default Counter;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 
 const CoffeeCard = ({ proizvod, onAddToCart }) => {
   const [kolicina, setKolicina] = useState(1);
@@ -6,7 +7,13 @@ const CoffeeCard = ({ proizvod, onAddToCart }) => {
   const handleClick = () => {
     const kolicinaInt = parseInt(kolicina);
     if (kolicinaInt >= 1) {
-      onAddToCart(proizvod, kolicinaInt);
+      // Dodajemo jedinstveni ID na proizvod prije slanja u korpu
+      const proizvodSaId = {
+        ...proizvod,
+        kolicina: kolicinaInt,
+        id: `${proizvod.naziv}-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      };
+      onAddToCart(proizvodSaId);
     } else {
       alert("Unesite validnu količinu.");
     }
@@ -23,16 +30,18 @@ const CoffeeCard = ({ proizvod, onAddToCart }) => {
         <p className="card-weight">Težina: {proizvod.gramaza}</p>
         <div className="card-bottom">
           <span className="cijena">{proizvod.cijena}</span>
-          <input
-            type="number"
-            min={1}
-            value={kolicina}
-            onChange={(e) => setKolicina(e.target.value)}
-            style={{ width: "50px", marginRight: "10px" }}
-          />
-          <button onClick={handleClick} className="btn btn-cart">
-            Dodaj u korpu
-          </button>
+          <div className="cart-actions">
+            <input
+              type="number"
+              min={1}
+              value={kolicina}
+              onChange={(e) => setKolicina(e.target.value)}
+              style={{ width: "60px", marginRight: "1rem" }}
+            />
+            <button onClick={handleClick} className="btn btn-cart">
+              +<FaShoppingCart />
+            </button>
+          </div>
         </div>
       </div>
     </div>

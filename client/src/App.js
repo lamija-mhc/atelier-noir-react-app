@@ -11,7 +11,7 @@ import Korpa from "./pages/korpa";
 import AdminPanel from "./pages/admin-panel";
 import ThankYou from "./pages/ThankYou";
 import Page404 from "./pages/404page";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 import "./css/style.css";
 
@@ -27,7 +27,7 @@ function App() {
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
       />
-
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/o_nama" element={<ONama />} />
@@ -82,11 +82,11 @@ function Home() {
           <p className="o_nama">
             U srcu planina Kolumbije, Luca Moreno stvorio je Atelier Noir iz strasti prema umjetnosti kafe. 
             Svaka šoljica naše premium kafe donosi autentičnost organskog uzgoja i ručne obrade, 
-            kombinuirajući prošlost i budućnost u svakom gutljaju.
+            kombinujući prošlost i budućnost u svakom gutljaju.
           </p>
           <img src="images/farmer2.png" alt="Proizvođač kafe" />
         </div>
-        <Link to="/o_nama" className="btn">Saznajte više</Link>
+        <Link to="/o_nama" className="btn primary">Saznajte više</Link>
       </section>
 
       {/* Stats */}
@@ -102,19 +102,19 @@ function Home() {
 
           <div className="stats-numbers">
             <div>
-              <Counter target={10214} duration={3000} />
+              <Counter target={10214} start={10000} duration={1000} />
               <p>Prodanih šoljica kafe</p>
             </div>
             <div>
-              <Counter target={5} duration={3000} />
+              <Counter target={5} start={0} duration={1000} />
               <p>Zvjezdica na reviews</p>
             </div>
             <div>
-              <Counter target={25} duration={3000} />
+              <Counter target={25} start={0} duration={1000} />
               <p>Saradnji širom svijeta</p>
             </div>
             <div>
-              <Counter target={104} duration={3000} />
+              <Counter target={104} start={0} duration={1000} />
               <p>Godine postojanja</p>
             </div>
           </div>

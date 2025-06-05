@@ -15,84 +15,44 @@
     "role": "guest",
     "korpa": [
       {
-        "naziv": "Extra Roast Ethiopian Whole",
-        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
-        "gramaza": "250g",
-        "cijena": "$12.00",
-        "kolicina": 1,
-        "slika": "images/extraRST_ehtiopian_whole.png"
-      },
-      {
         "naziv": "Premium Caramel Latte",
         "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
         "gramaza": "200g",
         "cijena": "$12.50",
-        "kolicina": 2,
-        "slika": "images/premium_caramel_latte.png"
+        "slika": "images/premium_caramel_latte.png",
+        "id": "Premium Caramel Latte-1748951112505-991"
       },
       {
         "naziv": "Premium Vanilla Latte",
         "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
         "gramaza": "250g",
         "cijena": "$12.50",
-        "kolicina": 1,
-        "slika": "images/slika-1748346859089-929618806.png"
+        "slika": "images/slika-1748346859089-929618806.png",
+        "id": "Premium Vanilla Latte-1748951117186-920"
       },
       {
-        "naziv": "Extra Roast Ethiopian Whole",
-        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "naziv": "Dark Roast Colombian Ground",
+        "opis": "Slojevit i dugotrajan kolumbijski ukus.",
         "gramaza": "250g",
-        "cijena": "$12.00",
-        "slika": "images/extraRST_ehtiopian_whole.png",
-        "kolicina": 1
+        "cijena": "$11.30",
+        "slika": "images/darkRST_colombian_groundbean.png",
+        "id": "Dark Roast Colombian Ground-1748951121367-614"
       },
       {
-        "naziv": "Extra Roast Ethiopian Whole",
-        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
+        "naziv": "Premium Vanilla Latte",
+        "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
         "gramaza": "250g",
-        "cijena": "$12.00",
-        "slika": "images/extraRST_ehtiopian_whole.png",
-        "kolicina": 15
-      },
-      {
-        "naziv": "Extra Roast Ethiopian Whole",
-        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
-        "gramaza": "250g",
-        "cijena": "$12.00",
-        "slika": "images/extraRST_ehtiopian_whole.png",
-        "kolicina": 1
-      },
-      {
-        "naziv": "Extra Roast Ethiopian Whole",
-        "opis": "Intenzivan i zemljani ukus sa luksuznim završetkom.",
-        "gramaza": "250g",
-        "cijena": "$12.00",
-        "slika": "images/extraRST_ehtiopian_whole.png",
-        "kolicina": 1
-      },
-      {
-        "naziv": "Premium Caramel Latte",
-        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
-        "gramaza": "200g",
         "cijena": "$12.50",
-        "slika": "images/premium_caramel_latte.png",
-        "kolicina": 1
+        "slika": "images/slika-1748346859089-929618806.png",
+        "id": "Premium Vanilla Latte-1748951143387-416"
       },
       {
-        "naziv": "Premium Caramel Latte",
-        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
-        "gramaza": "200g",
+        "naziv": "Premium Vanilla Latte",
+        "opis": "Nježna espresso vanila, savršen balans slatkoće i arome.",
+        "gramaza": "250g",
         "cijena": "$12.50",
-        "slika": "images/premium_caramel_latte.png",
-        "kolicina": 1
-      },
-      {
-        "naziv": "Premium Caramel Latte",
-        "opis": "Kremasti karamel spoj za uživanje u svakom gutljaju.",
-        "gramaza": "200g",
-        "cijena": "$12.50",
-        "slika": "images/premium_caramel_latte.png",
-        "kolicina": 1
+        "slika": "images/slika-1748346859089-929618806.png",
+        "id": "Premium Vanilla Latte-1748951323989-115"
       }
     ]
   }
